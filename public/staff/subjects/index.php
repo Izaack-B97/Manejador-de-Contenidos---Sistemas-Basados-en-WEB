@@ -4,8 +4,6 @@
   
   $subject_set = find_all_subjects();
   
-
-
 ?>
 
 <?php $page_title = 'Subjects'; ?>
