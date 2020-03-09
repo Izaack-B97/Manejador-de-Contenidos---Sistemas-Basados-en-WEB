@@ -2,23 +2,25 @@
 
 require_once('../../../private/initialize.php');
 
+$subject_id = '';
 $menu_name = '';
 $position = '';
 $visible = '';
+$content = '';
 
-if(is_post_request()) {
+// if(is_post_request()) {
 
-  // Handle form values sent by new.php
+//   // Handle form values sent by new.php
 
-  $menu_name = $_POST['menu_name'] ?? '';
-  $position = $_POST['position'] ?? '';
-  $visible = $_POST['visible'] ?? '';
+//   $menu_name = $_POST['menu_name'] ?? '';
+//   $position = $_POST['position'] ?? '';
+//   $visible = $_POST['visible'] ?? '';
 
-  echo "Form parameters<br />";
-  echo "Menu name: " . $menu_name . "<br />";
-  echo "Position: " . $position . "<br />";
-  echo "Visible: " . $visible . "<br />";
-}
+//   echo "Form parameters<br />";
+//   echo "Menu name: " . $menu_name . "<br />";
+//   echo "Position: " . $position . "<br />";
+//   echo "Visible: " . $visible . "<br />";
+// }
 
 ?>
 
@@ -32,10 +34,18 @@ if(is_post_request()) {
   <div class="page new">
     <h1>Create Page</h1>
 
-    <form action="<?php echo url_for('/staff/pages/new.php'); ?>" method="post">
+    <form action="<?php echo url_for('/staff/pages/create.php'); ?>" method="post">
+      <dl>
+        <dt>Subject ID</dt>
+        <dd>
+          <select name="subject_id">
+            <option value="1"<?php if($position == "1") { echo " selected"; } ?>>1</option>
+          </select>
+        </dd>
+      </dl>     
       <dl>
         <dt>Menu Name</dt>
-        <dd><input type="text" name="menu_name" value="<?php echo h($menu_name); ?>" /></dd>
+        <dd><input type="text" name="menu_name" value="" /></dd>
       </dl>
       <dl>
         <dt>Position</dt>
@@ -51,6 +61,10 @@ if(is_post_request()) {
           <input type="hidden" name="visible" value="0" />
           <input type="checkbox" name="visible" value="1"<?php if($visible == "1") { echo " checked"; } ?> />
         </dd>
+      </dl>
+      <dl>
+        <dt>Content</dt>
+        <dd><input type="text" name="content" value=""></dd>
       </dl>
       <div id="operations">
         <input type="submit" value="Create Page" />
