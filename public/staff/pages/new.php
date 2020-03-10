@@ -2,25 +2,12 @@
 
 require_once('../../../private/initialize.php');
 
-$subject_id = '';
-$menu_name = '';
-$position = '';
-$visible = '';
-$content = '';
+$page_set = find_all_pages();
+$page_count = mysqli_num_rows($page_set);
+mysqli_free_result($page_set);
 
-// if(is_post_request()) {
-
-//   // Handle form values sent by new.php
-
-//   $menu_name = $_POST['menu_name'] ?? '';
-//   $position = $_POST['position'] ?? '';
-//   $visible = $_POST['visible'] ?? '';
-
-//   echo "Form parameters<br />";
-//   echo "Menu name: " . $menu_name . "<br />";
-//   echo "Position: " . $position . "<br />";
-//   echo "Visible: " . $visible . "<br />";
-// }
+$page = [];
+$page['position'] = $page_count;
 
 ?>
 
@@ -39,7 +26,7 @@ $content = '';
         <dt>Subject ID</dt>
         <dd>
           <select name="subject_id">
-            <option value="1"<?php if($position == "1") { echo " selected"; } ?>>1</option>
+            <option value="1" selected>1</option>
           </select>
         </dd>
       </dl>     
@@ -51,7 +38,15 @@ $content = '';
         <dt>Position</dt>
         <dd>
           <select name="position">
-            <option value="1"<?php if($position == "1") { echo " selected"; } ?>>1</option>
+            <?php 
+              for ($i=1; $i <= $page_count ; $i++) { 
+                echo "<option value=\"{$i}\"";
+                if ($page['position'] == $i) {
+                    echo " selected";
+                }
+                echo ">{$i}</option>";
+              }
+            ?>
           </select>
         </dd>
       </dl>
@@ -59,7 +54,7 @@ $content = '';
         <dt>Visible</dt>
         <dd>
           <input type="hidden" name="visible" value="0" />
-          <input type="checkbox" name="visible" value="1"<?php if($visible == "1") { echo " checked"; } ?> />
+          <input type="checkbox" name="visible" value="1" />
         </dd>
       </dl>
       <dl>

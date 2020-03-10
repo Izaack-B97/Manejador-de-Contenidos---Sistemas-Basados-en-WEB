@@ -26,7 +26,7 @@ if (is_post_request()) {
 } else {
   $page = find_page_by_id($id);
 
-  $page_set = find_all_subjects();
+  $page_set = find_all_pages();
   $page_count = mysqli_num_rows($page_set);
   mysqli_free_result($page_set);
 }
@@ -60,7 +60,15 @@ if (is_post_request()) {
         <dt>Position</dt>
         <dd>
           <select name="position">
-            <option value="1"<?php if($page['position'] == "1") { echo " selected"; } ?>>1</option>
+          <?php 
+              for ($i=1; $i <= $page_count ; $i++) { 
+                echo "<option value=\"{$i}\"";
+                if ($page['position'] == $i) {
+                    echo " selected";
+                }
+                echo ">{$i}</option>";
+              }
+          ?>
           </select>
         </dd>
       </dl>

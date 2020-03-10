@@ -160,4 +160,24 @@ function update_page($page){
 	}
 }
 
+function delete_page($id){
+	global $db;
+
+	$sql = "DELETE FROM pages ";
+    $sql .= "WHERE id='" . $id . "' ";
+    $sql .= "LIMIT 1";
+
+    $result = mysqli_query($db, $sql);
+
+    // For DELETE statements, $result is true/false
+    if ($result) {
+        redirect_to(url_for('/staff/pages/index.php'));
+    } else {
+        //DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
 ?>
