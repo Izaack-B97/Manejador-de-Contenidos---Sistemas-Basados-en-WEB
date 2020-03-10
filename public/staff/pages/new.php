@@ -7,7 +7,6 @@ $page_count = mysqli_num_rows($page_set);
 mysqli_free_result($page_set);
 
 $subject_set = find_all_subjects();
-echo implode(',',$subject_set);
 $subject_count = mysqli_num_rows($subject_set);
 
 $page = [];
