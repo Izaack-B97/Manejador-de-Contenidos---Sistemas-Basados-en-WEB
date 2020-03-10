@@ -6,8 +6,16 @@ $page_set = find_all_pages();
 $page_count = mysqli_num_rows($page_set);
 mysqli_free_result($page_set);
 
+$subject_set = find_all_subjects();
+echo implode(',',$subject_set);
+$subject_count = mysqli_num_rows($subject_set);
+
 $page = [];
 $page['position'] = $page_count;
+
+$subject = [];
+$subject['position'] = $subject_count;
+
 
 ?>
 
@@ -26,7 +34,15 @@ $page['position'] = $page_count;
         <dt>Subject ID</dt>
         <dd>
           <select name="subject_id">
-            <option value="1" selected>1</option>
+            <?php 
+              for ($i=1; $i <= $subject_count ; $i++) { 
+                echo "<option value=\"{$i}\"";
+                if ($subject['position'] == $i) {
+                    echo " selected";
+                }
+                echo ">{$i}</option>";
+              }
+            ?>
           </select>
         </dd>
       </dl>     
