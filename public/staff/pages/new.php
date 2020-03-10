@@ -7,13 +7,12 @@ $page_count = mysqli_num_rows($page_set);
 mysqli_free_result($page_set);
 
 $subject_set = find_all_subjects();
-$subject_count = mysqli_num_rows($subject_set);
 
 $page = [];
 $page['position'] = $page_count;
 
-$subject = [];
-$subject['position'] = $subject_count;
+// $subject = [];
+// $subject['position'] = $subject_count;
 
 
 ?>
@@ -33,14 +32,9 @@ $subject['position'] = $subject_count;
         <dt>Subject ID</dt>
         <dd>
           <select name="subject_id">
-            <?php 
-              for ($i=1; $i <= $subject_count ; $i++) { 
-                echo "<option value=\"{$i}\"";
-                if ($subject['position'] == $i) {
-                    echo " selected";
-                }
-                echo ">{$i}</option>";
-              }
+            <?php
+              while($subject = mysqli_fetch_assoc($subject_set)) // Iteramos al array associativo de subjects
+                echo "<option value=". $subject['id'] .">". $subject['menu_name'] ."</option>";
             ?>
           </select>
         </dd>

@@ -9,6 +9,8 @@ if(!isset($_GET['id'])) {
 $id = $_GET['id'];
 $page = find_page_by_id($id); // Buscamos el page por su subject en la base de datos
 
+$subject_set = find_all_subjects();
+
 if (is_post_request()) {
   
   // Handle form values sent by new.php
@@ -48,7 +50,15 @@ if (is_post_request()) {
         <dt>Subject ID</dt>
         <dd>
           <select name="subject_id">
-            <option value="1"<?php if($page['subject_id'] == "1") { echo " selected"; } ?>>1</option>
+            <?php 
+              while($subject = mysqli_fetch_assoc($subject_set)){
+                echo "<option value=\"{$subject['id']}\"";
+                if ($subject['id'] == intval($page['subject_id'])) {
+                  echo "selected";
+                }
+                echo ">{$subject['menu_name']}</option>";
+              }
+            ?>
           </select>
         </dd>
       </dl>

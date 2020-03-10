@@ -4,7 +4,8 @@
 // $id = isset($_GET['id']) ? $_GET['id'] : '1';
 $id = $_GET['id'] ?? '1'; // PHP > 7.0
 
-$page = find_page_by_id($id);
+$page = find_page_by_id($id); // Regresa un array associativo
+$subject = find_subject_by_id($page['subject_id']); // Este igual
 
 ?>
 
@@ -19,8 +20,8 @@ $page = find_page_by_id($id);
     <!-- Page ID: <?php echo h($id); ?> -->
     <div class="attributes">
       <dl>
-        <dt>Subject ID</dt>
-        <dd><?php echo $page['subject_id']; ?></dd>
+        <dt>ID/Subject</dt>
+        <dd><?php echo $page['subject_id'] . ". " . $subject['menu_name']; ?></dd>
       </dl>
       <dl>
         <dt>Menu name</dt>
