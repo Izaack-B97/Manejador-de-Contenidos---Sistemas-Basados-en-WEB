@@ -43,5 +43,24 @@ function is_get_request() {
   return $_SERVER['REQUEST_METHOD'] == 'GET';
 }
 
+// Funcion para validar pages
+function validate_page($menu_name, $content){
+  $errores = [];
+  
+  if (trim($menu_name) == "") 
+    array_push($errores, "El Menu Name esta vacio");
+  
+  if(strlen($menu_name) > 25)
+    array_push($errores, "El Menu Name es demaciado largo");
+  
+  // if(preg_match("/^[A-Z]/", $menu_name )){ // Si la primera letra es mayuscula
+  //   array_push($errores, "La primera letra del Menu Name debe empezar con mayuscula");
+  // }
+
+  if(strlen($content) > 200)
+    array_push($errores, "El Content es demaciado largo");
+
+  return $errores;
+}
 
 ?>

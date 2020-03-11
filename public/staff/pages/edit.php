@@ -14,17 +14,27 @@ $subject_set = find_all_subjects();
 if (is_post_request()) {
   
   // Handle form values sent by new.php
+  $errores = validate_page($_POST['menu_name'], $_POST['content']); // Validamos el form
+  
+  if($errores != null){
+    echo "<h5>Errores en el formulario</h5>";
+    echo "<p>Porfavor verifique que introdujo correctamente los datos</p>";
 
-  $page = [];
-  $page['id'] = $id;
-  $page['subject_id'] = $_POST['subject_id'] ?? '';
-  $page['menu_name'] = $_POST['menu_name'] ?? '';
-  $page['position'] = $_POST['position'] ?? '';
-  $page['visible'] = $_POST['visible'] ?? '';
-  $page['content'] = $_POST['content'] ?? '';
+    foreach ($errores as $key => $err)
+      echo "<h6 style='color:red;'>" . $err . "</h6>";
+  }
+  else{
+    $page = [];
+    $page['id'] = $id;
+    $page['subject_id'] = $_POST['subject_id'] ?? '';
+    $page['menu_name'] = $_POST['menu_name'] ?? '';
+    $page['position'] = $_POST['position'] ?? '';
+    $page['visible'] = $_POST['visible'] ?? '';
+    $page['content'] = $_POST['content'] ?? '';
 
-  $result = update_page($page);
-  redirect_to(url_for('/staff/pages/show.php?id=' . $id));
+    $result = update_page($page);
+    redirect_to(url_for('/staff/pages/show.php?id=' . $id));
+  }
 } else {
   $page = find_page_by_id($id);
 

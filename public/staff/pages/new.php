@@ -11,10 +11,6 @@ $subject_set = find_all_subjects();
 $page = [];
 $page['position'] = $page_count;
 
-// $subject = [];
-// $subject['position'] = $subject_count;
-
-
 ?>
 
 <?php $page_title = 'Create Page'; ?>
@@ -41,7 +37,7 @@ $page['position'] = $page_count;
       </dl>     
       <dl>
         <dt>Menu Name</dt>
-        <dd><input type="text" name="menu_name" value="" /></dd>
+        <dd><input type="text" name="menu_name" value=""/></dd>
       </dl>
       <dl>
         <dt>Position</dt>

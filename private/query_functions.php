@@ -2,13 +2,6 @@
 
 // ***Todo el rollo de los subjects
 
-// function find_all_subjects_array_assoc(){
-// 	global $db;
-// 	$sql = "SELECT id, menu_name FROM subjects";
-// 	// echo $sql;
-	
-// }
-
 function find_all_subjects(){
 	global $db;
 	$sql = "SELECT * FROM subjects ";
